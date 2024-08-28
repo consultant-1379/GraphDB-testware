@@ -1,0 +1,7 @@
+chart_archive: "any"
+helm_repo: "https://armdocker.rnd.ericsson.se/artifactory/proj-helm_aia-generic-local/snapshots/eric-graphdb-int"
+baseline_chart_version: "0.0.1-24"
+baseline_deployment_type: "deployment"
+baseline_chart_name: "eric-graphdb-int"
+test-params:
+  - "example=example"

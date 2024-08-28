@@ -1,0 +1,7 @@
+[submodule "bob"]
+	path = bob
+	url = ../../../adp-cicd/bob
+[submodule "testframework"]
+	path = testframework
+	url = ../testframework
+	branch = GraphDbTestFramework

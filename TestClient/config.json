@@ -1,0 +1,6 @@
+{
+  "port": 5001,
+  "graphdb_url": "bolt://127.0.0.1",
+  "graphdb_user": "neo4j",
+  "graphdb_password": "demo"
+}

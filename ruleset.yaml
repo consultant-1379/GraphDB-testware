@@ -1,0 +1,29 @@
+---
+docker:
+  registry: armdocker.rnd.ericsson.se/aia_snapshots
+builder:
+  env:
+    - GLOBAL_IMAGE_VERSION: $(project::get_version ${RELEASE:-})
+    - GLOBAL_HELM_REPO: https://armdocker.rnd.ericsson.se/artifactory/proj-helm_aia-generic-local/snapshots/
+    - GLOBAL_HELM_REPOPATH: eric-graphdb-int
+    - GLOBAL_KUBECONFIG: ${KUBECONFIG:-}
+
+ruleset:
+  - version:
+
+  - docker:
+      env:
+        - DOCKER_IMAGE_NAME: ${DOCKER_REGISTRY}/graphdb-test-client
+        - DOCKERFILE_PREFIX: ./TestClient/Docker/
+        - DOCKER_IMAGE_VERSION: ${GLOBAL_IMAGE_VERSION}
+
+  - helm:
+      env:
+        - HELM_DESTINATION_FOLDER: 'helm-target'
+        - HELM_REPO: ${GLOBAL_HELM_REPO}
+        - HELM_REPO_INDEX: "true"
+
+rule:
+  clean:
+    execute: |
+      rm -rf helm-target

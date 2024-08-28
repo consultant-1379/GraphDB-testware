@@ -1,0 +1,50 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ include "graphdb-test-client.fullname" . }}
+  labels:
+    app: {{ include "graphdb-test-client.name" . }}
+    chart: {{ include "graphdb-test-client.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "graphdb-test-client.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "graphdb-test-client.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.imageCredentials.registry.url }}/{{ .Values.imageCredentials.repoPath }}/{{ .Values.image.repository }}:{{ .Chart.Version }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: "port"
+              value: {{ .Values.testClient.port | quote }}
+            - name: "graphdb_url"
+              value: {{ include "graphdb-test-client-svc.name" . }}
+            - name: "graphdb_user"
+              value: {{ .Values.testClient.graphdbUser }}
+            - name: "graphdb_password"
+              value: {{ .Values.testClient.graphdbPassword }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.testClient.port }}
+              hostPort: {{ .Values.testClient.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.testClient.port }}
+              timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.testClient.port }}
+              timeoutSeconds: 5
+          resources:

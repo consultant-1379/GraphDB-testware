@@ -1,0 +1,12 @@
+# Testframework output
+output.html
+testdeploy.log
+
+# Pycharm files
+
+.idea/*
+
+# Python
+
+*/__pycache__/*
+*.pyc

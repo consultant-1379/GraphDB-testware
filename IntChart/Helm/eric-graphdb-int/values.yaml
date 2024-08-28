@@ -1,0 +1,29 @@
+tags:
+  logging: true
+eric-data-visualizer-kb:
+  service:
+    type: NodePort
+    externalPort: 31000
+  branding:
+    enabled: false
+  replicaCount: 1
+eric-log-shipper:
+  logshipper:
+    cfgData: |
+      paths:
+        - /var/lib/docker/containers/**/*.log
+        - /var/lib/neo4j/logs/*.log
+      fields:
+        logplane: kubelog
+eric-data-search-engine:
+  client:
+    replicas: 1
+  data:
+    replicas: 1
+eric-pm-server:
+  server:
+    service:
+      type: NodePort
+  rbac:
+    appMonitoring:
+      enabled: true

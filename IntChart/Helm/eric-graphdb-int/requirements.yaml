@@ -1,0 +1,27 @@
+dependencies:
+- name: eric-graphdb-n4j
+  version: "0.0.1-9edc2b8"
+  repository: "https://armdocker.rnd.ericsson.se/artifactory/proj-helm_aia-generic-local/snapshots/eric-graphdb-n4j"
+- name: eric-pm-server
+  repository: "https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-pm-server-helm"
+  version: ">0.0.0"
+- name: eric-data-search-engine
+  repository: "https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-data-search-engine-helm"
+  version: ">0.0.0"
+  tags:
+    - logging
+- name: eric-log-transformer
+  repository: "https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-log-transformer-helm"
+  version: ">0.0.0"
+  tags:
+    - logging
+- name: eric-data-visualizer-kb
+  repository: "https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-data-visualizer-kb-helm"
+  version: ">0.0.0"
+  tags:
+    - logging
+- name: eric-log-shipper
+  repository: "https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-log-shipper-helm"
+  version: ">0.0.0"
+  tags:
+    - logging
